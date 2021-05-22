@@ -1,6 +1,10 @@
 package com.bridgelabz;
 
 public class Contact {
+    public String getFirstName() {
+        return firstName;
+    }
+
     private String firstName;
     private String lastName;
     private String address;
@@ -62,4 +66,7 @@ public class Contact {
     }
 
 
+    public String getfirstName() {
+        return firstName;
+    }
 }
