@@ -1,8 +1,10 @@
 package com.bridgelabz;
 
 public class AddressBookMain {
+    AddressBook addressBook=new AddressBook();
     public static void main(String[] args) {
         System.out.println("Welcome to Address book Program");
-        //new AddressBook();
+        AddressBook addressBook=new AddressBook();
+
     }
 }
