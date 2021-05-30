@@ -4,137 +4,104 @@ import java.util.Scanner;
 
 public class AddressBook {
     Contact contact;
-    Scanner scanner = new Scanner(System.in);
-    private String state;
+    Scanner input = new Scanner(System.in);
 
-    public Contact getContact() {
-        return contact;
+    // FUNCTION TO ADD PERSON TO ADDRESS BOOK
+    Person addPerson() {
+        Person p = new Person();
+        System.out.print("Enter First name: ");
+        String fname = input.next();
+        System.out.print("Enter Last name: ");
+        String lname = input.next();
+        System.out.print("Enter Address: ");
+        String address = input.next();
+        System.out.print("Enter City: ");
+        String city = input.next();
+        System.out.print("Enter state: ");
+        String state = input.next();
+        System.out.print("Enter Zip: ");
+        int zip = input.nextInt();
+        System.out.print("Enter phone number: ");
+        String phoneNum = input.next();
+        p.setPerson(fname,lname,address,city,state,zip,phoneNum);
+        return p;
     }
 
-    public void add() {
-        contact = new Contact();
-        System.out.println("enter first name");
-        String firstName = scanner.nextLine();
-        System.out.println("enter last name");
-        String lastName = scanner.nextLine();
-        System.out.println("enter address");
-        String address = scanner.nextLine();
-        System.out.println("enter city");
-        String city = scanner.nextLine();
-        System.out.println("enter state");
-        String bihar = scanner.nextLine();
-        System.out.println("enter zipnum");
-        String zip = scanner.nextLine();
-        System.out.println("enter phone Number");
-        String phone = scanner.nextLine();
-        System.out.println("enter email");
-        String email = scanner.nextLine();
-        System.out.println("contact");
-        contact.setFirstName(firstName);
-        contact.setLastName(lastName);
-        contact.setAddress(address);
-        contact.setCity(city);
-        contact.setState(state);
-        contact.setZipNum(zip);
-        contact.setPhoneNum(phone);
-        contact.setEmail(email);
-
+    // FUNCTION TO EDIT PERSON RECORD
+    LinkedList<Person> editPerson(LinkedList<Person> addressBook){
+        System.out.print("Enter First Name to edit record: ");
+        String fname = input.next();
+        System.out.print("Enter Last Name: ");
+        String lname = input.next();
+        int flag2 = 0;
+        for(Person p : addressBook){
+            System.out.print(p.getFName()+" "+p.getLName());
+            if(fname.equals(p.getFName()) && lname.equals(p.getLName())){
+                System.out.println("\nEnter edit choice" +
+                        "\n1. Address" +
+                        "\n2. City" +
+                        "\n3. State" +
+                        "\n4. Zip" +
+                        "\n5. Phone Number");
+                int choice = input.nextInt();
+                switch (choice){
+                    case 1:
+                        System.out.print("Enter Updated Address: ");
+                        String address = input.next();
+                        p.setAddress(address);
+                        break;
+                    case 2:
+                        System.out.print("Enter Updated City: ");
+                        String city = input.next();
+                        p.setCity(city);
+                        break;
+                    case 3:
+                        System.out.print("Enter Updated State: ");
+                        String state = input.next();
+                        p.setState(state);
+                        break;
+                    case 4:
+                        System.out.print("Enter Updated Zip: ");
+                        int zip = input.nextInt();
+                        p.setZip(zip);
+                        break;
+                    case 5:
+                        System.out.print("Enter Updated Phone Number: ");
+                        String phoneNum = input.next();
+                        p.setPhoneNum(phoneNum);
+                        break;
+                    default:
+                        System.out.println("Wrong Choice !!!");
+                }
+                flag2 = 1;
+                System.out.println("Updatation Successful !!!");
+            }
+            if (flag2 == 0){
+                System.out.println("Record dose not exist !!!");
+            }
+        }
+        return addressBook;
     }
 
-    public boolean edit() {
-        System.out.println("enter first name");
-        String firstName = scanner.nextLine();
-        if (firstName.equals(contact.getfirstName()) == false) {
-            return false;
-
+    //FUNCTION TO DELETE RECORD FROM THE ADDRESS BOOK
+    LinkedList<Person> deletePerson(LinkedList<Person> addressBook){
+        System.out.print("Enter First Name to delete record: ");
+        String fname = input.next();
+        System.out.print("Enter Last Name: ");
+        String lname = input.next();
+        int flag=0;
+        for(Person person : addressBook){
+            if(fname.equals(person.getFName()) && lname.equals(person.getLName())){
+                addressBook.remove(person);
+                System.out.println("Deletion Successful !!!");
+                flag=1;
+                break;
+            }
         }
-        System.out.println("which details you want to edit:");
-        System.out.println("press 1 for changing first name:");
-        System.out.println("press 1 for changing last name:");
-        System.out.println("press 1 for changing address:");
-        System.out.println("press 1 for changing city:");
-        System.out.println("press 1 for changing state:");
-        System.out.println("press 1 for changing Zip Num:");
-        System.out.println("press 1 for changing phone Num:");
-        System.out.println("press 1 for changing email:");
-        int choice = Integer.valueOf(scanner.next());
-        switch (choice) {
-            case 1:
-                contact.setFirstName(scanner.nextLine());
-                break;
-            case 2:
-                contact.setLastName(scanner.nextLine());
-                break;
-            case 3:
-                contact.setAddress(scanner.nextLine());
-                break;
-            case 4:
-                contact.setCity(scanner.nextLine());
-                break;
-            case 5:
-                contact.setState(scanner.nextLine());
-                break;
-            case 6:
-                contact.setZipNum(scanner.nextLine());
-                break;
-            case 7:
-                contact.setPhoneNum(scanner.nextLine());
-                break;
-            case 8:
-                contact.setEmail(scanner.nextLine());
-                break;
-            default:
+        if (flag==0){
+            System.out.println("No Record exists !!!");
         }
-
-        return true;
-    }
-
-    public boolean delete() {
-        System.out.println("enter first name");
-        String firstName = scanner.nextLine();
-        if (firstName.equals(contact.getfirstName()) == false) {
-            return false;
-        }
-
-        System.out.println("which details you want to delete:");
-        System.out.println("press 1 for changing first name:");
-        System.out.println("press 1 for changing last name:");
-        System.out.println("press 1 for changing address:");
-        System.out.println("press 1 for changing city:");
-        System.out.println("press 1 for changing state:");
-        System.out.println("press 1 for changing Zip Num:");
-        System.out.println("press 1 for changing phone Num:");
-        System.out.println("press 1 for changing email:");
-        int choice = Integer.valueOf(scanner.next());
-        switch (choice) {
-            case 1:
-                contact.setFirstName(scanner.nextLine());
-                break;
-            case 2:
-                contact.setLastName(scanner.nextLine());
-                break;
-            case 3:
-                contact.setAddress(scanner.nextLine());
-                break;
-            case 4:
-                contact.setCity(scanner.nextLine());
-                break;
-            case 5:
-                contact.setState(scanner.nextLine());
-                break;
-            case 6:
-                contact.setZipNum(scanner.nextLine());
-                break;
-            case 7:
-                contact.setPhoneNum(scanner.nextLine());
-                break;
-            case 8:
-                contact.setEmail(scanner.nextLine());
-                break;
-            default:
-
-        }
-                return true;
+        return addressBook;
     }
 }
 
