@@ -9,61 +9,50 @@ public class AddressBookMain {
 
         String chooseContact, chooseCity;
 
+
         do {
             System.out.println("Enter the name of city");
-            String city = scanner.nextLine();
-            AddressBook addressBook = new AddressBook(city);
+            String cityName = scanner.next();
+            AddressBook addressBook = new AddressBook(cityName);
             for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
-                if (entry.getKey().equals(city)) {
+                if (entry.getKey().equals(cityName)) {
                     addressBook = entry.getValue();
                 }
             }
-            addressBookHashMap.put(city, addressBook);
+            addressBookHashMap.put(cityName, addressBook);
             do {
                 System.out.println("Enter first name:");
-                String firstName = scanner.nextLine();
-
+                String firstName = scanner.next();
                 System.out.println("Enter last name:");
-                String lastName = scanner.nextLine();
-
+                String lastName = scanner.next();
                 System.out.println("Enter address name:");
-                String address = scanner.nextLine();
-
-                System.out.println("Enter state name:");
-                String state = scanner.nextLine();
-
+                String address = scanner.next();
                 System.out.println("Enter zip code:");
-                String zip = scanner.nextLine();
-
+                String zipcode = scanner.next();
                 System.out.println("Enter phone number:");
-                String phoneNumber = scanner.nextLine();
-
+                String phoneNumber = scanner.next();
                 System.out.println("Enter emailId number:");
-                String emailID = scanner.nextLine();
-
-                Contact contact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, emailID);
-
+                String emailID = scanner.next();
+                Contact contact = new Contact(firstName, lastName, address, cityName, zipcode, phoneNumber, emailID);
                 for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
-                    if (entry.getKey().equalsIgnoreCase(city)) {
+                    if (entry.getKey().equalsIgnoreCase(cityName)) {
                         entry.getValue().addContact(contact);
                     }
                 }
                 System.out.println("Do you want to add contact again? Yes|No");
-                chooseContact = scanner.nextLine();
-            } while (chooseContact.equalsIgnoreCase("yes"));
+                chooseContact = scanner.next();
+            } while (chooseContact.equals("yes"));
             System.out.println("Do you want to add another city Yes|No");
-            chooseCity = scanner.nextLine();
-        } while (chooseCity.equalsIgnoreCase("yes"));
-
-        System.out.println(addressBookHashMap);
+            chooseCity = scanner.next();
+        } while (chooseCity.equals("yes"));
     }
 
 
     //Search Contact By City or State
-    public static void searchContactByCityOrState(String city, String name) {
+    public static void searchContactByCityOrState (String city, String name){
         List<Contact> contactList = new ArrayList<>();
 
-        for (Map.Entry < String, AddressBook > entry : addressBookHashMap.entrySet()) {
+        for (Map.Entry<String, AddressBook> entry : addressBookHashMap.entrySet()) {
             contactList = entry.getValue().getAddressBook().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).filter(p -> (p.getFirstName()).equals(name)).collect(Collectors.toList());
         }
         for (Contact contact : contactList) {
@@ -72,13 +61,36 @@ public class AddressBookMain {
     }
 
 
+
+    // method to view person by city
+    public static void viewContactByCityOrState(String city) {
+        List<Contact> list = new ArrayList<>();
+        for(Map.Entry < String, AddressBook> entries : addressBookHashMap.entrySet()) {
+            list = entries.getValue().getAddressBook().stream().filter(p -> p.getCity().equalsIgnoreCase(city)).collect(Collectors.toList());
+        }
+        for(Contact person : list) {
+            System.out.println(person.getFirstName() + " " + person.getLastName());
+        }
+    }
+
+
+
     // MAIN METHOD
     public static void main(String[] args) {
-        System.out.println(" Welcome To AddressBook System");
+        System.out.println(" ---------------------------- Welcome To AddressBook System ------------------------------");
         Scanner scanner = new Scanner(System.in);
         int choice;
+
         do {
-            System.out.println("1. Add new contact" + "\n" + "2. Edit contact details" + "\n" + "3. Delete contact details" + "\n" +  "4. Search Contact by City or State " + "\n" + "5. Show Contacts" + "\n" + "6. Exit" + "\n" + "Enter your choice:");
+            System.out.println("1. Add new contact" + "\n" +
+                    "2. Edit contact details" + "\n" +
+                    "3. Delete contact details" + "\n" +
+                    "4. Search Contact by City " + "\n" +
+                    "5. View Contact by City" + "\n" +
+                    "6. Show Contacts" + "\n" +
+                    "0. Exit" + "\n" +
+                    "Enter your choice:");
+
             choice = scanner.nextInt();
 
             switch (choice) {
@@ -127,10 +139,17 @@ public class AddressBookMain {
                     break;
 
                 case 5:
+                    System.out.println("Enter the city you want to view");
+                    String city3 = scanner.next();
+                    viewContactByCityOrState(city3);
+                    break;
+
+                case 6:
                     for (Map.Entry<String,AddressBook> entry : addressBookHashMap.entrySet()) {
                         System.out.println(entry.getKey() + "\t" + entry.getValue().getAddressBook()); }
             }
-        } while(choice != 6);
+        } while(choice != 0);
+    }
     }
 
 

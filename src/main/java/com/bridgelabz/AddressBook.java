@@ -6,7 +6,7 @@ public class AddressBook {
     Scanner scanner = new Scanner(System.in);
     public String name;
 
-    public <Contact> addressBook = new LinkedList<>();
+    public LinkedList<Contact> addressBook = new LinkedList<>();
 
     public AddressBook(String name) {
         this.name = name;
@@ -48,7 +48,7 @@ public class AddressBook {
             editName = contact.getFirstName();
             if (firstname.equalsIgnoreCase(editName)) {
                 do {
-                    System.out.println("1. Edit First name" + "\n" + "2. Edit Last name" + "\n" + "3. Edit Address " + "\n" + "4. Edit City " + "\n" + "5. Edit State" + "\n" + "6. Edit Zipcode " + "\n" + "7. Edit Phone Number" + "\n" + "8. Edit Email" + "\n" +"0. EXIT" + "\n" + "Enter your choice :");
+                    System.out.println("1. Edit First name" + "\n" + "2. Edit Last name" + "\n" + "3. Edit Address " + "\n" + "4. Edit Zipcode " + "\n" + "5. Edit Phone Number" + "\n" + "7. Edit Email" + "\n" +"0. EXIT" + "\n" + "Enter your choice :");
                     choice = scanner.nextInt();
                     switch (choice) {
                         case 1:
@@ -72,28 +72,21 @@ public class AddressBook {
                             System.out.println(contact);
                             break;
 
-                        case 5:
-                            System.out.println("Enter new state:");
-                            String newState = scanner.next();
-                            contact.setState(newState);
-                            System.out.println(contact);
-                            break;
-
-                        case 6:
+                        case 4:
                             System.out.println("Enter new zipcode:");
                             String newZipcode = scanner.next();
                             contact.setZip(newZipcode);
                             System.out.println(contact);
                             break;
 
-                        case 7:
+                        case 5:
                             System.out.println("Enter new phone number :");
                             String newPhone = scanner.next();
                             contact.setPhoneNumber(newPhone);
                             System.out.println(contact);
                             break;
 
-                        case 8:
+                        case 6:
                             System.out.println("Enter new email id:");
                             String newEmail = scanner.next();
                             contact.setEmail(newEmail);
@@ -119,6 +112,9 @@ public class AddressBook {
                 System.out.println("Contact name " + firstname + "deleted successfully from the contact list");
             } else {
                 System.out.println("There is no contact named " + firstname + ". Please Enter a Valid Name!!");
+            }
+        }
+    }
     }
 
 
