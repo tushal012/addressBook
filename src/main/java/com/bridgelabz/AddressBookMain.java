@@ -182,6 +182,7 @@ public class AddressBookMain {
                     for (Map.Entry<String,AddressBook> entry : addressBookHashMap.entrySet()) {
                         System.out.println(entry.getKey() + "\t" + entry.getValue().getAddressBook()); }
             }
+
         } while(choice != 0);
     }
     }

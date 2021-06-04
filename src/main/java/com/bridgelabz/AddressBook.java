@@ -12,6 +12,7 @@ public class AddressBook {
         this.name = name;
     }
     public LinkedList<Contact> getAddressBook() {
+
         return addressBook;
     }
 
