@@ -3,122 +3,122 @@ package com.bridgelabz;
 import java.util.Scanner;
 
 public class AddressBook {
-    Contact contact;
-    Scanner input = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
+    public String name;
 
-    // FUNCTION TO ADD PERSON TO ADDRESS BOOK
-    LinkedList<Person> addPerson(LinkedList<Person> addressBook) {
-        Person p = new Person();
-        System.out.print("Enter First name: ");
-        String fname = input.next();
-        System.out.print("Enter Last name: ");
-        String lname = input.next();
-        if (checkExist(fname,lname,addressBook) == true){
-            System.out.println("Record already exists cant add !!!");
+    public <Contact> addressBook = new LinkedList<>();
+
+    public AddressBook(String name) {
+        this.name = name;
+    }
+    public LinkedList<Contact> getAddressBook() {
+        return addressBook;
+    }
+
+    public void setAddressBook(LinkedList<Contact> addressBook) {
+        this.addressBook = addressBook;
+    }
+
+    // method to check for duplicate entry
+    public boolean checkDuplicateEntry(Contact contact) {
+        boolean status = false;
+        for (Contact person : addressBook) {
+            status = person.equals(contact);
+        }
+        return status;
+    }
+
+    // ADD CONTACT
+    public void addContact(Contact contact) {
+        boolean duplicateStatus = checkDuplicateEntry(contact);
+        if (!duplicateStatus) {
+            addressBook.add(contact);
+            System.out.println("Contact added successfully!");
         } else {
-            System.out.print("Enter Address: ");
-            String address = input.next();
-            System.out.print("Enter City: ");
-            String city = input.next();
-            System.out.print("Enter state: ");
-            String state = input.next();
-            System.out.print("Enter Zip: ");
-            int zip = input.nextInt();
-            System.out.print("Enter phone number: ");
-            String phoneNum = input.next();
-            p.setPerson(fname, lname, address, city, state, zip, phoneNum);
-            addressBook.add(p);
+            System.out.println("The person already exists!");
         }
-        return addressBook;
-
-    }
-    // FUNCTION TO CHECK IF RECORD ALREADY EXISTS OR NOT
-    boolean checkExist(String fname, String lname, LinkedList<Person> addressBook){
-        boolean result = false;
-        for(Person person : addressBook){
-            if(fname.equals(person.getFName()) && lname.equals(person.getLName())){
-                result = true;
-            }
-        }
-        return result;
+        System.out.println("AddressBook Data : " + addressBook);
     }
 
-    // FUNCTION TO EDIT PERSON RECORD
-    LinkedList<Person> editPerson(LinkedList<Person> addressBook){
-        System.out.print("Enter First Name to edit record: ");
-        String fname = input.next();
-        System.out.print("Enter Last Name: ");
-        String lname = input.next();
-        int flag2 = 0;
-        for(Person p : addressBook){
-            System.out.print(p.getFName()+" "+p.getLName());
-            if(fname.equals(p.getFName()) && lname.equals(p.getLName())){
-                System.out.println("\nEnter edit choice" +
-                        "\n1. Address" +
-                        "\n2. City" +
-                        "\n3. State" +
-                        "\n4. Zip" +
-                        "\n5. Phone Number");
-                int choice = input.nextInt();
-                switch (choice){
-                    case 1:
-                        System.out.print("Enter Updated Address: ");
-                        String address = input.next();
-                        p.setAddress(address);
-                        break;
-                    case 2:
-                        System.out.print("Enter Updated City: ");
-                        String city = input.next();
-                        p.setCity(city);
-                        break;
-                    case 3:
-                        System.out.print("Enter Updated State: ");
-                        String state = input.next();
-                        p.setState(state);
-                        break;
-                    case 4:
-                        System.out.print("Enter Updated Zip: ");
-                        int zip = input.nextInt();
-                        p.setZip(zip);
-                        break;
-                    case 5:
-                        System.out.print("Enter Updated Phone Number: ");
-                        String phoneNum = input.next();
-                        p.setPhoneNum(phoneNum);
-                        break;
-                    default:
-                        System.out.println("Wrong Choice !!!");
-                }
-                flag2 = 1;
-                System.out.println("Updatation Successful !!!");
-            }
-            if (flag2 == 0){
-                System.out.println("Record dose not exist !!!");
+    // EDIT contact from the addressBook by the FIRSTNAME
+    public void editContactByFirstName(String firstname) {
+        String editName;
+        Integer choice;
+        for (Contact contact : addressBook) {
+            editName = contact.getFirstName();
+            if (firstname.equalsIgnoreCase(editName)) {
+                do {
+                    System.out.println("1. Edit First name" + "\n" + "2. Edit Last name" + "\n" + "3. Edit Address " + "\n" + "4. Edit City " + "\n" + "5. Edit State" + "\n" + "6. Edit Zipcode " + "\n" + "7. Edit Phone Number" + "\n" + "8. Edit Email" + "\n" +"0. EXIT" + "\n" + "Enter your choice :");
+                    choice = scanner.nextInt();
+                    switch (choice) {
+                        case 1:
+                            System.out.println("Enter new first name:");
+                            String newFirstName = scanner.next();
+                            contact.setFirstName(newFirstName);
+                            System.out.println(contact);
+                            break;
+
+                        case 2:
+                            System.out.println("Enter new last name:");
+                            String newLastName = scanner.next();
+                            contact.setLastName(newLastName);
+                            System.out.println(contact);
+                            break;
+
+                        case 3:
+                            System.out.println("Enter new address:");
+                            String newAddress = scanner.next();
+                            contact.setAddress(newAddress);
+                            System.out.println(contact);
+                            break;
+
+                        case 5:
+                            System.out.println("Enter new state:");
+                            String newState = scanner.next();
+                            contact.setState(newState);
+                            System.out.println(contact);
+                            break;
+
+                        case 6:
+                            System.out.println("Enter new zipcode:");
+                            String newZipcode = scanner.next();
+                            contact.setZip(newZipcode);
+                            System.out.println(contact);
+                            break;
+
+                        case 7:
+                            System.out.println("Enter new phone number :");
+                            String newPhone = scanner.next();
+                            contact.setPhoneNumber(newPhone);
+                            System.out.println(contact);
+                            break;
+
+                        case 8:
+                            System.out.println("Enter new email id:");
+                            String newEmail = scanner.next();
+                            contact.setEmail(newEmail);
+                            System.out.println(contact);
+                            break;
+                    }
+                } while (!choice.equals(0));
+                System.out.println(contact);
+            } else {
+                System.out.println("There is no contact named  " + firstname + ". Try Again !!");
             }
         }
-        return addressBook;
     }
 
-    //FUNCTION TO DELETE RECORD FROM THE ADDRESS BOOK
-    LinkedList<Person> deletePerson(LinkedList<Person> addressBook){
-        System.out.print("Enter First Name to delete record: ");
-        String fname = input.next();
-        System.out.print("Enter Last Name: ");
-        String lname = input.next();
-        int flag=0;
-        for(Person person : addressBook){
-            if(fname.equals(person.getFName()) && lname.equals(person.getLName())){
-                addressBook.remove(person);
-                System.out.println("Deletion Successful !!!");
-                flag=1;
-                break;
-            }
-        }
-        if (flag==0){
-            System.out.println("No Record exists !!!");
-        }
-        return addressBook;
+    // DELETE contact from the address book by the FIRSTNAME
+    public void deleteContact(String firstname) {
+        String deleteName;
+        for (Contact contact : addressBook) {
+            deleteName = contact.getFirstName();
+            System.out.println(deleteName);
+            if (firstname.equalsIgnoreCase(deleteName)) {
+                addressBook.remove(contact);
+                System.out.println("Contact name " + firstname + "deleted successfully from the contact list");
+            } else {
+                System.out.println("There is no contact named " + firstname + ". Please Enter a Valid Name!!");
     }
-}
 
 
