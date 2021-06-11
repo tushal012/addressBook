@@ -91,6 +91,6 @@ public class Contact {
     }
 
 
-    public void put(int indexValue, Contact contacts) {
+    public void put(int indexValue, Contact contact) {
     }
 }
