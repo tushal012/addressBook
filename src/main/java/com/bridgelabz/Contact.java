@@ -1,15 +1,16 @@
 package com.bridgelabz;
 
 public class Contact {
-    private String firstName;
+    public String firstName;
     private String lastName;
     private String address;
-    private String city;
-    private String state;
+    public String city;
+    public String state;
     private int zip;
-    private String phoneNum;
+    private long mobileNumber;
+    private String emailId;
 
-    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, long mobileNumber, String emailId) {
+    public Contact(String firstName, String lastName, String address, String city, String state, int zip, long mobileNumber, String emailId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -83,21 +84,6 @@ public class Contact {
         this.emailId = emailId;
     }
     @Override
-    public boolean equals(Object obj) {
-        boolean result = false;
-
-
-        if(obj == this) {
-            return true;
-        }
-        Contact contact = (Contact)obj;
-
-        if(contact.firstName.equals(this.firstName) && contact.lastName.equals(this.lastName)) {
-            result = true;
-        }
-        return result;
-    }
-    @Override
     public String toString(){
         return this.firstName + " " + this.lastName + ":" + this.mobileNumber + ", " + this.emailId +  " "
                 + " address:" + this.address + ", state:" + this.state + ", city:" + this.city + ", zipCode:"
@@ -105,5 +91,6 @@ public class Contact {
     }
 
 
-
+    public void put(int indexValue, Contact contacts) {
+    }
 }
