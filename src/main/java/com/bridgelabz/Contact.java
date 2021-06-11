@@ -21,6 +21,12 @@ public class Contact {
         this.emailId = emailId;
     }
 
+    public Contact(String filePath, String filePath1, String filePath2, String filePath3, String filePath4, String filePath5, String filePath6, String filePath7, String filePath8) {
+    }
+
+    public Contact(String[] field, String[] field1, String[] field2, String[] field3, String[] field4, String[] field5, String[] field6, String[] field7, String[] field8) {
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -91,6 +97,6 @@ public class Contact {
     }
 
 
-    public void put(int indexValue, Contact contact) {
+    public void add(Contact contact1) {
     }
 }

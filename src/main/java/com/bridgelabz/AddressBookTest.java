@@ -10,7 +10,7 @@ public class AddressBookTest {
     private static String HOME = System.getProperty("user.dir");
     private static String checkContact = "Employee Details";
 
-    @org.testng.annotations.Test
+    @Test
     public void givenPathWhenCheckedThenConfirm() throws IOException {
         System.out.println(HOME);
         /* Check File Exist */
