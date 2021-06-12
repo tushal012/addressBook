@@ -7,13 +7,7 @@ import java.util.*;
 
 
 public class AddressBook {
-    public static void main(String[] args) {
-        String filePath = "C:\\Users\\Desktop\\CsvReader\\AddressBookIO";
-        System.out.println("Starting File writing :" + filePath);
-        writeCsv(filePath);
-        System.out.println("starting read file");
-        readCsv(filePath);
-    }
+
     public static void writeCsv(String filePath) {
         List<Contact> contact = new ArrayList<Contact>();
         Contact contact1 = new Contact(filePath, filePath, filePath, filePath, filePath, filePath, filePath,
@@ -56,7 +50,7 @@ public class AddressBook {
     public static void readCsv(String filePath) {
         BufferedReader reader = null;
         try {
-            List<Contact> empContacts = new ArrayList<Contact>();
+            List<Contact> empContact = new ArrayList<Contact>();
             String line = "";
             reader = new BufferedReader(new FileReader(filePath));
             reader.readLine();
@@ -76,7 +70,7 @@ public class AddressBook {
                     contact.add(contact);
                 }
             }
-            for (Contact ad : empContacts) {
+            for (Contact ad : empContact) {
                 System.out.printf(
                         "First Name = %s,Last Name = s, Address = %s, City = %s, State = %s,Zip = %s,Phone Number = %s,Email = %s",
                         ad.getFirstName(), ad.getLastName(), ad.getAddress(), ad.getCity(), ad.getState(), ad.getZip(),
